@@ -1,4 +1,4 @@
-from wq.io import NetLoader, TupleMapper, BaseIO
+from itertable import NetLoader, TupleMapper, BaseIter
 from climata.base import WebserviceLoader, FilterOpt, DateOpt, ChoiceOpt
 from climata.parsers import RdbParser, WaterMlParser
 from .constants import SITE_TYPES
@@ -37,7 +37,7 @@ class NwisLoader(WebserviceLoader):
         return "http://waterservices.usgs.gov/nwis/%s/" % self.service
 
 
-class NwisWaterMlIO(NwisLoader, WaterMlParser, TupleMapper, BaseIO):
+class NwisWaterMlIO(NwisLoader, WaterMlParser, TupleMapper, BaseIter):
     """
     Base class for loading WaterML data from the USGS web services.  Use
     DailyValuesIO or InstantValuesIO instead depending on your needs.
@@ -48,7 +48,7 @@ class NwisWaterMlIO(NwisLoader, WaterMlParser, TupleMapper, BaseIO):
     }
 
 
-class ParameterIO(NetLoader, RdbParser, TupleMapper, BaseIO):
+class ParameterIO(NetLoader, RdbParser, TupleMapper, BaseIter):
     """
     Base class for loading USGS NWIS parameter code definitions.  Use
     FixedParameterIO or NumericParameterIO instead depending on your needs.
@@ -63,7 +63,7 @@ class ParameterIO(NetLoader, RdbParser, TupleMapper, BaseIO):
 
 # Preset classes for commonly used NWIS web services
 
-class SiteIO(NwisLoader, RdbParser, TupleMapper, BaseIO):
+class SiteIO(NwisLoader, RdbParser, TupleMapper, BaseIter):
     """
     Loads USGS site metadata from NWIS webservices (via RDB format).
 

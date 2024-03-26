@@ -4,9 +4,9 @@
     :align: center
 
 **climata** is a pythonic interface for loading and processing time series data
-from climate and flow monitoring stations and observers. climata leverages 
+from climate and flow monitoring stations and observers. climata leverages
 a number of webservices as listed below.  climata is powered by
-`wq.io <http://wq.io/wq.io>`_, and shares its goal of maximizing the reusability of
+`IterTable <https://django-data-wizard.wq.io/itertable/>`_, and shares its goal of maximizing the reusability of
 data parsing code, by smoothing over some of the differences between various data formats.
 
 
@@ -17,11 +17,11 @@ data parsing code, by smoothing over some of the differences between various dat
 .. image:: https://img.shields.io/github/release/heigeo/climata.svg
     :target: https://github.com/heigeo/climata/releases
     :alt: Release Notes
-    
+
 .. image:: https://img.shields.io/pypi/l/climata.svg
     :target: https://github.com/heigeo/climata/blob/master/LICENSE
     :alt: License
-    
+
 .. image:: https://img.shields.io/github/stars/heigeo/climata.svg
     :target: https://github.com/heigeo/climata/stargazers
     :alt: GitHub Stars
@@ -29,7 +29,7 @@ data parsing code, by smoothing over some of the differences between various dat
 .. image:: https://img.shields.io/github/forks/heigeo/climata.svg
     :target: https://github.com/heigeo/climata/network
     :alt: GitHub Forks
-    
+
 .. image:: https://img.shields.io/github/issues/heigeo/climata.svg
     :target: https://github.com/heigeo/climata/issues
     :alt: GitHub Issues
@@ -39,7 +39,7 @@ data parsing code, by smoothing over some of the differences between various dat
 .. image:: https://img.shields.io/travis/heigeo/climata.svg
     :target: https://travis-ci.org/heigeo/climata
     :alt: Travis Build Status
-    
+
 .. image:: https://img.shields.io/pypi/pyversions/climata.svg
     :target: https://pypi.python.org/pypi/climata
     :alt: Python Support
@@ -79,11 +79,11 @@ Command-line interface:
 .. code:: bash
 
     # Load metadata for sites in Upper Klamath Lake basin
-    wq cat climata.acis.StationMetaIO "basin=18010203" > sites.csv
+    python -m itertable climata.acis.StationMetaIO "basin=18010203" > sites.csv
 
     # Load daily average temperature for these sites
     PARAMS="basin=18010203,start_date=2017-01-01,end_date=2017-01-31,parameter=avgt"
-    wq cat climata.acis.StationDataIO "$PARAMS" > data.csv
+    python -m itertable climata.acis.StationDataIO "$PARAMS" > data.csv
 
 
 Python API:

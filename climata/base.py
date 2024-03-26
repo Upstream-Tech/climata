@@ -1,7 +1,7 @@
 from warnings import warn
 from .version import VERSION
 from datetime import datetime, timedelta
-from wq.io import make_date_mapper, NetLoader, Zipper
+from itertable import make_date_mapper, NetLoader, Zipper
 
 
 parse_date = make_date_mapper('%Y-%m-%d')
@@ -126,7 +126,7 @@ class WebserviceLoader(NetLoader):
             val = kwargs.pop(name, opt.default)
             self._values[name] = opt.parse(val)
 
-        # Mimic BaseIO behavior since it's not a super class of NetLoader
+        # Mimic BaseIter behavior since it's not a super class of NetLoader
         if kwargs:
             self.__dict__.update(**kwargs)
         self.refresh()
@@ -210,7 +210,7 @@ class WebserviceLoader(NetLoader):
     @property
     def params(self):
         """
-        URL parameters for wq.io.loaders.NetLoader
+        URL parameters for itertable.loaders.NetLoader
         """
         params, complex = self.get_params()
         url_params = self.default_params.copy()

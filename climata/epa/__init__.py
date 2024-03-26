@@ -1,9 +1,9 @@
-from wq.io import BaseIO, TimeSeriesMapper, XmlParser
+from itertable import BaseIter, TimeSeriesMapper, XmlParser
 from climata.base import ZipWebserviceLoader, FilterOpt, DateOpt, ChoiceOpt
 from .constants import DOMAINS
 
 
-class WqxDomainIO(ZipWebserviceLoader, XmlParser, TimeSeriesMapper, BaseIO):
+class WqxDomainIO(ZipWebserviceLoader, XmlParser, TimeSeriesMapper, BaseIter):
     """
     Load WQX / STORET domain values from EPA web services.
 

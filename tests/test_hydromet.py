@@ -1,7 +1,7 @@
 from .base import ClimataTestCase
 from climata.hydromet import DailyDataIO, InstantDataIO, AgrimetRecentIO
 from datetime import datetime, date
-from wq.io.exceptions import NoData
+from itertable.exceptions import NoData
 
 
 class HydrometTestCase(ClimataTestCase):

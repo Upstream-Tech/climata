@@ -1,9 +1,9 @@
-from wq.io import TimeSeriesMapper, XmlParser, BaseIO
+from itertable import TimeSeriesMapper, XmlParser, BaseIter
 from datetime import datetime
 from climata.base import WebserviceLoader, FilterOpt, DateOpt, ChoiceOpt
 
 
-class CocorahsIO(WebserviceLoader, XmlParser, TimeSeriesMapper, BaseIO):
+class CocorahsIO(WebserviceLoader, XmlParser, TimeSeriesMapper, BaseIter):
     """
     Retrieves CoCoRaHS observations from data.cocorahs.org
 
@@ -46,7 +46,7 @@ class CocorahsIO(WebserviceLoader, XmlParser, TimeSeriesMapper, BaseIO):
         choices=["Daily", "MultiDay"],
     )
 
-    # Configuration for wq.io base classes
+    # Configuration for itertable base classes
     url = "http://data.cocorahs.org/cocorahs/export/exportreports.aspx"
 
     root_tag = 'Cocorahs'

@@ -1,8 +1,8 @@
-from wq.io import CsvNetIO
+from itertable import CsvNetIter
 from collections import OrderedDict
 
 
-class CountyIO(CsvNetIO):
+class CountyIO(CsvNetIter):
     url = "http://www.census.gov/geo/reference/codes/files/national_county.txt"
 
 

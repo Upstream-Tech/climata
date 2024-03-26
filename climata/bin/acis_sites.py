@@ -69,7 +69,7 @@ def load_sites(*basin_ids):
         for auth in site.sids.keys():
             seen_auths.add(auth)
 
-    # Print CSV headers (FIXME: use CsvFileIO for this?)
+    # Print CSV headers (FIXME: use CsvFileIter for this?)
     seen_auths = sorted(seen_auths)
     seen_elems = sorted(seen_elems)
     print(",".join(

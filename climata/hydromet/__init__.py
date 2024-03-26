@@ -1,7 +1,7 @@
-from wq.io import CsvParser, TimeSeriesMapper, TupleMapper, BaseIO
+from itertable import CsvParser, TimeSeriesMapper, TupleMapper, BaseIter
 from collections import OrderedDict
 from climata.base import WebserviceLoader, FilterOpt
-from wq.io.exceptions import NoData
+from itertable.exceptions import NoData
 from requests.compat import urlencode
 
 
@@ -24,7 +24,7 @@ class HydrometLoader(WebserviceLoader):
     parameter = FilterOpt(required=True, multi=True)
 
 
-class HydrometIO(HydrometLoader, CsvParser, TimeSeriesMapper, BaseIO):
+class HydrometIO(HydrometLoader, CsvParser, TimeSeriesMapper, BaseIter):
     """
     Base class for retrieving Hydromet data from USBR.
     Use DailyDataIO or InstantDataIO instead, depending on your needs.
@@ -115,7 +115,7 @@ class DailyDataIO(HydrometIO):
     key_fields = ['date']
 
 
-class MultiStationDailyIO(HydrometLoader, TupleMapper, BaseIO):
+class MultiStationDailyIO(HydrometLoader, TupleMapper, BaseIter):
     """
     Retrieves daily values for one or more USBR Hydromet/Agrimet sites.
     (Internally calls DailyDataIO for each site.)

@@ -1,9 +1,9 @@
 from __future__ import print_function
 
-from wq.io import BaseIO, TupleMapper, TimeSeriesMapper
-from wq.io.parsers.base import BaseParser
-from wq.io.exceptions import NoData
-from wq.io.util import flattened
+from itertable import BaseIter, TupleMapper, TimeSeriesMapper
+from itertable.parsers.base import BaseParser
+from itertable.exceptions import NoData
+from itertable.util import flattened
 
 from suds.client import Client
 from suds.sudsobject import asdict, Object as SudsObject
@@ -21,7 +21,7 @@ def get_server():
     return _server
 
 
-class SnotelIO(WebserviceLoader, BaseParser, TupleMapper, BaseIO):
+class SnotelIO(WebserviceLoader, BaseParser, TupleMapper, BaseIter):
     """
     Base class for accessing SNOTEL AWDB SOAP web services.
     """
@@ -55,7 +55,7 @@ class SnotelIO(WebserviceLoader, BaseParser, TupleMapper, BaseIO):
             self.data = [parse(row) for row in self.data]
 
     # Some records may have additional fields; loop through entire
-    # array to ensure all field names are accounted for.  (Otherwise BaseIO
+    # array to ensure all field names are accounted for.  (Otherwise BaseIter
     # will guess field names using only the first record.)
     scan_fields = True
 

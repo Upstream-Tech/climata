@@ -1,4 +1,4 @@
-from wq.io.parsers.base import TableParser
+from itertable.parsers.base import TableParser
 from csv import reader
 
 

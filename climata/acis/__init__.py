@@ -1,5 +1,5 @@
 import json
-from wq.io import JsonParser, BaseIO, TupleMapper, TimeSeriesMapper
+from itertable import JsonParser, BaseIter, TupleMapper, TimeSeriesMapper
 from climata.base import (
     WebserviceLoader, FilterOpt, DateOpt, ChoiceOpt,
     parse_date, fill_date_range,
@@ -20,7 +20,7 @@ class ParameterOpt(ChoiceOpt):
     choices = list(ELEMENT_BY_ID.keys()) + list(ELEMENT_BY_NAME.keys())
 
 
-class AcisIO(WebserviceLoader, JsonParser, TupleMapper, BaseIO):
+class AcisIO(WebserviceLoader, JsonParser, TupleMapper, BaseIter):
     """
     Base class for loading data from ACIS web services
     See http://data.rcc-acis.org/doc/
@@ -44,7 +44,7 @@ class AcisIO(WebserviceLoader, JsonParser, TupleMapper, BaseIO):
     @property
     def url(self):
         """
-        URL for wq.io.loaders.NetLoader
+        URL for itertable.loaders.NetLoader
         """
         return "http://data.rcc-acis.org/%s" % self.path
 
@@ -69,7 +69,7 @@ class StationMetaIO(AcisIO):
     See http://data.rcc-acis.org/doc/#title8
     """
 
-    namespace = "meta"  # For wq.io.parsers.text.JsonParser
+    namespace = "meta"  # For itertable.parsers.text.JsonParser
     path = "StnMeta"
 
     # These options are not required for StationMetaIO
@@ -95,7 +95,7 @@ class StationMetaIO(AcisIO):
     def map_value(self, field, value):
         """
         Clean up some values returned from the web service.
-        (overrides wq.io.mappers.BaseMapper)
+        (overrides itertable.mappers.BaseMapper)
         """
 
         if field == 'sids':
@@ -132,7 +132,7 @@ class StationDataIO(StationMetaIO):
 
     nested = True
 
-    namespace = "data"  # For wq.io.parsers.text.JsonParser
+    namespace = "data"  # For itertable.parsers.text.JsonParser
     path = "MultiStnData"
 
     # Specify ACIS-defined URL parameters for start/end date
@@ -199,7 +199,7 @@ class StationDataIO(StationMetaIO):
         return super(StationDataIO, self).usable_item(item)
 
 
-class DataIO(TimeSeriesMapper, BaseIO):
+class DataIO(TimeSeriesMapper, BaseIter):
     """
     IO for iterating over ACIS time series data.
     Created internally by StationDataIO; not meant to be used directly.
@@ -250,7 +250,7 @@ class DataIO(TimeSeriesMapper, BaseIO):
     def get_field_names(self):
         """
         Different field names depending on self.add setting (see load_data)
-        For BaseIO
+        For BaseIter
         """
         if self.add:
             return ['date', 'elem', 'value'] + [flag for flag in self.add]

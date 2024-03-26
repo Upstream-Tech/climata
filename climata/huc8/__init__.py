@@ -1,8 +1,8 @@
-from wq.io import NetLoader, TupleMapper, BaseIO
+from itertable import NetLoader, TupleMapper, BaseIter
 from climata.parsers import RdbParser
 
 
-class HucIO(NetLoader, RdbParser, TupleMapper, BaseIO):
+class HucIO(NetLoader, RdbParser, TupleMapper, BaseIter):
     url = "http://water.usgs.gov/GIS/new_huc_rdb.txt"
 
     def parse(self):

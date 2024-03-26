@@ -15,7 +15,7 @@ DESCRIPTION = "Loads climate and hydrology data from %s." % SVC_STR
 
 LONG_DESCRIPTION = """
 A pythonic library for iterating over climate time series data from %s.
-Powered by wq.io.
+Powered by IterTable.
 """ % SVC_STR
 
 
@@ -45,9 +45,9 @@ setup(
     description=DESCRIPTION,
     long_description=long_description(),
     install_requires=[
-        'wq.io>=0.7.0',
+        'itertable>=2.0',
         'owslib>=0.9',
-        "suds-jurko",
+        "suds",
     ],
     scripts=['climata/bin/acis_sites.py', 'climata/bin/acis_data.py'],
     classifiers=[

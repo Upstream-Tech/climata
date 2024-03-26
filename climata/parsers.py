@@ -1,5 +1,5 @@
-from wq.io import CsvParser, BaseIO, TimeSeriesMapper
-from wq.io.parsers.base import BaseParser
+from itertable import CsvParser, BaseIter, TimeSeriesMapper
+from itertable.parsers.base import BaseParser
 from owslib.waterml.wml11 import WaterML_1_1 as WaterML
 
 
@@ -16,7 +16,7 @@ class RdbParser(CsvParser):
         self.data = self.data[1:]
 
 
-class TimeSeriesIO(TimeSeriesMapper, BaseIO):
+class TimeSeriesIO(TimeSeriesMapper, BaseIter):
     """
     Inner IO class for use by WaterMlParser.
     """
@@ -27,7 +27,7 @@ class TimeSeriesIO(TimeSeriesMapper, BaseIO):
 
 class WaterMlParser(BaseParser):
     """
-    wq.io-compatible Parser mixin for WaterML timeseries data.
+    itertable-compatible Parser mixin for WaterML timeseries data.
     Generates a nested IO for each actual time series.
 
     Leverages owslib.waterml internally.

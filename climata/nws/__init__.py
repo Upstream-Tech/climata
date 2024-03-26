@@ -1,5 +1,5 @@
-from wq.io import (
-    XmlNetIO, XmlParser, BaseIO,
+from itertable import (
+    XmlNetIter, XmlParser, BaseIter,
     TupleMapper, TimeSeriesMapper
 )
 from climata.base import (
@@ -9,7 +9,7 @@ from climata.base import (
 from .parsers import EnsembleCsvParser
 
 
-class HydroForecastIO(WebserviceLoader, XmlParser, TimeSeriesMapper, BaseIO):
+class HydroForecastIO(WebserviceLoader, XmlParser, TimeSeriesMapper, BaseIter):
     """
     Loads hydrograph forecast data (next 3 days) from weather.gov
     """
@@ -47,7 +47,7 @@ class HydroForecastIO(WebserviceLoader, XmlParser, TimeSeriesMapper, BaseIO):
 
 
 class EnsembleForecastIO(ZipWebserviceLoader, EnsembleCsvParser,
-                         TupleMapper, BaseIO):
+                         TupleMapper, BaseIter):
 
     """
     Load ensemble forecast zip files from the CNRFC website.
@@ -123,7 +123,7 @@ class EnsembleForecastIO(ZipWebserviceLoader, EnsembleCsvParser,
         return super(EnsembleForecastIO, self).usable_item(item)
 
 
-class TimeSeriesIO(TimeSeriesMapper, BaseIO):
+class TimeSeriesIO(TimeSeriesMapper, BaseIter):
     date_formats = ["%Y-%m-%d %H:%M:%S"]
 
     def usable_item(self, item):
@@ -132,7 +132,7 @@ class TimeSeriesIO(TimeSeriesMapper, BaseIO):
         return uitem._replace(value=uitem.value * 1000)
 
 
-class SiteIO(XmlNetIO):
+class SiteIO(XmlNetIter):
     """
     Base class for CNRFC site layers.  Use ForecastSiteIO or EnsembleSiteIO.
     """
